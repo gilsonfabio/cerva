@@ -53,7 +53,7 @@ const ListIteCar = ({ data }:any) => {
   }
 
   return (
-    <View className='flex-col items-center justify-center w-[96%] h-20 mt-2 bg-gray-300  rounded-md'>
+    <View className='flex-col items-center justify-center w-[96%] h-20 mt-2 bg-slate-300 rounded-md'>
       <View className='flex-row w-full items-center justify-between'>
         <Text className='w-[60%] ml-2 font-semibold'>{data.prdDescricao}</Text>
         <Text className='w-[10%]'>{data.itePedQtde}</Text>

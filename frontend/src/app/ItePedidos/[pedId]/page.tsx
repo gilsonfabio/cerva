@@ -1,6 +1,6 @@
 "use client"
 import React, {useState, useEffect} from "react"
-import { useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 import {
     Table,
@@ -24,7 +24,7 @@ type pedidosProps = {
   "pedVlrTotal": number; 
   "pedCupom": string; 
   "pedVlrPagar": number; 
-  "pedStatus": string; 
+  "pedStatus": number; 
   "pedEndEntrega": number; 
   "pedVlrTaxEntrega": number; 
   "pedFrmPagto": number; 
@@ -67,6 +67,8 @@ export default function ItePedidos() {
   const [pedidos, setPedidos] = useState<Array<pedidosProps>>([]);
   const [itens, setItens] = useState<Array<itensProps>>([]);
 
+  const router = useRouter()
+
   useEffect(() => {   
 
     let idPed = params.pedId
@@ -89,9 +91,10 @@ export default function ItePedidos() {
     let idPed = params.pedId
     api({
       method: 'put',    
-      url: `entPedido/:${idPed}`,      
+      url: `entPedido/${idPed}`,      
     }).then(function(response) {
         alert(`Pedido enviado para entrega com sucesso! ${response.data}` )
+        router.back()
     }).catch(function(error) {
       alert('Erro no envio do pedido!')
     })

@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react'
 import { View, Text, Image, FlatList } from "react-native"
-import { useLocalSearchParams, useGlobalSearchParams, Link } from 'expo-router';
+import { useLocalSearchParams, Link } from 'expo-router';
 
 import { api } from '@/server/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LisLinProdutos from '@/components/LisLinProdutos';
+import Menubar from '@/components/Menubar';
 
 type produtoProps = {
     prdId: string;
@@ -20,13 +21,20 @@ type produtoProps = {
     prdUrlPhoto: string;
 }
 
+type paramsProps = {
+    idUsr: string;
+    name: string;
+    title: string;
+    id: string;
+}
+
 export default function LinProdutos(){
     const [produtos, setProdutos] = useState<Array<produtoProps>>([]);
-    const local = useLocalSearchParams();
-
+    const { idUsr, name, title, id } = useLocalSearchParams<paramsProps>();
+    
     useEffect(() => {
     
-        let idLnh = local.id;
+        let idLnh = id;
         api({
             method: 'get',    
             url: `linprodutos/${idLnh}`,                 
@@ -39,10 +47,8 @@ export default function LinProdutos(){
     }, []);
 
     return(
-        <View className="flex-1 flex-col bg-slate-900">
-            <View>
-                <Text className="text-md font-semibold text-yellow-400 mt-3 mb-3">Produtos p/ Linha</Text>
-            </View>
+        <View className="flex-1 flex-col bg-slate-800">
+            <Menubar user={idUsr} nomUser={name} sysTitle={title} />      
             <FlatList
                 data={produtos}
                 className='ml-3'
@@ -53,3 +59,9 @@ export default function LinProdutos(){
         </View>
     )
 }
+
+/*
+    <View className='flex w-screen h-20 bg-violet-900 items-center justify-center'>
+        <Text className="text-md font-semibold text-yellow-400 mt-3 mb-3">Produtos p/ Linha</Text>
+    </View>
+*/

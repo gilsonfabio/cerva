@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "expo-router"
 import { View, Text, FlatList, SafeAreaView} from "react-native"
+import {useLocalSearchParams, Link } from "expo-router";
 
 import {api} from '@/server/api';
 import ListLinhas from '@/components/ListLinhas';
@@ -13,6 +13,8 @@ type GruposProps = {
 export default function Linhas() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const { idUsr, name, title } = useLocalSearchParams();
 
     const [grupos, setGrupos] = useState<Array<GruposProps>>([]);
 
@@ -29,7 +31,7 @@ export default function Linhas() {
     }, []);
 
     return(
-        <View className="flex flex-col items-center bg-gray-100 ">            
+        <View className="flex flex-col items-center bg-slate-900 ">            
             <FlatList
                 data={grupos}
                 className='w-full ml-1 mb-0'

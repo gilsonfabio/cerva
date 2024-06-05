@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "expo-router"
 import { View, Text, ImageBackground } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
@@ -27,3 +28,4 @@ export default function Home(){
         </View>    
     )
 }
+

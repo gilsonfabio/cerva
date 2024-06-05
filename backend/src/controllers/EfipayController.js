@@ -66,12 +66,8 @@ module.exports = {
         
         const res = await efipay.pixCreateImmediateCharge([], body);
 
-        console.log(res)
+        //console.log(res)
         //return response.json(res);
-
-
-
-
 
         
 
@@ -87,20 +83,10 @@ module.exports = {
         
         let status = 'P';
 
-
-
-        //const [lanId] = await connection('pedidos').insert({
-        //    lanUsrId,
-        //    lanMovId, 
-        //    lanEquId,
-        //    lanData: datProcess,
-        //    lanHora: horProcess, 
-        //    lanValor,
-        //    lanTxid: txid, 
-        //    lanStatus: status 
-        //});
-
-
+        const pedido = await connection('pedidos').where('pedId', lanMovId)
+        .update({
+            pedTxid: txid           
+        });
 
         let paramsQRCode = {
             id: res.loc.id

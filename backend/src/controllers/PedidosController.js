@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 
 module.exports = {   
     async index (request, response) {
-        let status = '1'
+        let status = 1;
         const pedidos = await connection('pedidos')
         .where('pedStatus', status)
         .join('clientes', 'cliId', 'pedidos.pedCliId')
@@ -131,7 +131,7 @@ module.exports = {
             .first();
           
         if (!car) {
-            return response.status(400).json({ error: 'Não encontrou car. compras p/ este ID'});
+            return response.status(400).json({error: 'Não encontrou car. compras p/ este ID'});
         } 
 
         return response.json(car);
@@ -247,13 +247,31 @@ module.exports = {
            
     },
 
-    async entPedido (request, response) {
-        let id = request.params.idPed
-        let status = 3
-        const pedido = await connection('pedidos')
-        .where('pedId', id)
+    async entPedido(request, response) {
+        let id = request.params.idPed;
+        let status = 3;
+
+        console.log('update pedido nr.', id)
+
+        const pedido = await connection('pedidos').where('pedId', id)
         .update({
             pedStatus: status           
+        });
+       
+        return response.json(pedido);
+    },
+
+    async cnfPedido(request, response) {
+        let id = request.body.idPed;
+        let txid = request.body.pedTxid;
+        let status = 2;
+
+        console.log('confirmando pedido nr.', id)
+
+        const pedido = await connection('pedidos').where('pedId', id)
+        .update({
+            pedStatus: status, 
+            pedTxid: txid           
         });
        
         return response.json(pedido);

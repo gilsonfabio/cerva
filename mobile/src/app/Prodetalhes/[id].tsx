@@ -43,7 +43,7 @@ export default function Prodetalhes(){
         
     useEffect(() => {
         
-        let idUsrCar = local.usrId;    
+        let idUsrCar = local.idUsr;    
         api.get(`searchCar/${idUsrCar}`).then(resp => { 
             setCarShop(resp.data.pedId)
             setCount(resp.data.pedQtdtotal)
@@ -73,7 +73,7 @@ export default function Prodetalhes(){
 
     useEffect(() => {               
         
-        let idUsrCar = local.usrId;    
+        let idUsrCar = local.idUsr;    
         api.get(`searchCar/${idUsrCar}`).then(resp => { 
             setCarShop(resp.data.pedId)
             setCount(resp.data.pedQtdtotal)
@@ -122,7 +122,7 @@ export default function Prodetalhes(){
     
         api.post('newprocar', {
             pedData: new Date(),
-            pedCliId: local.usrId, 
+            pedCliId: local.idUsr, 
             pedQtdTotal: qtdProd, 
             pedVlrTotal: vlrTotal, 
             pedCupom: cupom, 
@@ -143,40 +143,40 @@ export default function Prodetalhes(){
 
     return(
         <View className="flex-1 bg-white items-center">
-            <View className='flex-row w-full h-24 bg-violet-900 items-center justify-between'>
-                <TouchableOpacity onPress={() => {}} className="">
+            <View className='flex-row w-full h-24 bg-amber-500 items-center justify-between'>
+                <TouchableOpacity onPress={() => router.back()} className="">
                     <View className='ml-2'>                      
-                        <AntDesign name="arrowleft" size={24} color="white" />
+                        <AntDesign name="arrowleft" size={24} color="black" />
                     </View>
                 </TouchableOpacity>
-                <Text className="text-white text-2xl font-bold">Detalhes</Text>
-                <Link href={{pathname: "/CarShopping/[id]", params: { id: carshop, usrId: 1}}} asChild> 
+                <Text className="text-black text-2xl font-bold">Detalhes</Text>
+                <Link href={{pathname: "/CarShopping/[id]", params: {id: carshop, usrId: local.idUsr}}} asChild> 
                     <TouchableOpacity >
                         <View className="flex-col">
                             <View className="flex-row w-6 h-6 ml-1 items-center rounded-full bg-red-600 ">
                                 <Text className="ml-1 text-white font-semibold">{count}</Text>
                             </View>            
-                            <FontAwesome name="shopping-cart" size={26} color="white" className="mr-5 -mt-2 "/>
+                            <FontAwesome name="shopping-cart" size={26} color="black" className="mr-5 -mt-2 "/>
                         </View>
                     </TouchableOpacity>
                 </Link>
             </View>
             <View className='flex w-full items-center'>
-                <View className='flex items-center w-full h-auto mt-5 ml-2 mb-5 '>
+                <View className='flex items-center w-full mt-5 ml-2 mb-5 '>
                     <Image source={{uri: `https://thumbs2.imgbox.com/${prdUrlPhoto}`}} resizeMode="contain" className='mt-5 ml-3 w-64 h-80' />
                 </View>
                 <View className='flex w-full h-40 bg-white '>
 
                 </View>
-                <View className='w-full h-auto'>
-                    <Text className='mt-2 ml-3 text-violet-900 text-2xl font-semibold'>{prdDescricao}</Text>
+                <View className='w-full'>
+                    <Text className='mt-2 ml-3 text-slate-900 text-2xl font-semibold'>{prdDescricao}</Text>
                 </View>
-                <View className='w-full h-auto'>
-                    <Text className='mt-1 ml-3 text-violet-900 text-md font-normal'>{prdReferencia}</Text>
+                <View className='w-full'>
+                    <Text className='mt-1 ml-3 text-slate-900 text-md font-normal'>{prdReferencia}</Text>
                 </View>
-                <View className='flex-row w-full h-auto '>
-                    <Text className='mt-1 ml-3 mr-2 text-violet-900 text-2xl font-bold'>R$ {prdVdaUnitario}</Text>
-                    <Text className='mt-4 text-violet-900 text-xs font-bold'>/cada</Text>
+                <View className='flex-row w-full'>
+                    <Text className='mt-1 ml-3 mr-2 text-slate-900 text-2xl font-bold'>R$ {prdVdaUnitario}</Text>
+                    <Text className='mt-4 text-slate-900 text-xs font-bold'>/cada</Text>
                 </View>    
             </View>
             <View className='flex-row items-center w-96 h-20'>
@@ -196,8 +196,8 @@ export default function Prodetalhes(){
             </View>
             <View className='flex-row items-center w-96 h-20'>
                 <TouchableOpacity className='w-96' onPress={onPress}> 
-                    <View className='flex items-center justify-center w-96 h-14 bg-violet-900 rounded-lg'>
-                        <Text className='text-white text-md font-bold'>Confirmar</Text>
+                    <View className='flex items-center justify-center w-96 h-14 bg-amber-500 rounded-lg'>
+                        <Text className='text-amber-100 text-xl font-bold'>Confirmar</Text>
                     </View>
                 </TouchableOpacity>
             </View>    

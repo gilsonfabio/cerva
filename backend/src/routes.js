@@ -48,5 +48,6 @@ routes.get('/pedidos', PedidosController.index);
 routes.get('/searchPed/:idPed', PedidosController.searchPed);
 routes.get('/itePedido/:idPed', PedidosController.itePedido);
 routes.put('/entPedido/:idPed', PedidosController.entPedido);
+routes.post('/cnfPedido', PedidosController.cnfPedido);
 
 module.exports = routes;

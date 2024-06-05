@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, View, Image, Text, Dimensions, FlatList} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 
 import {api} from '@/server/api';
 import MosLinhas from './MosLinhas';
@@ -24,7 +24,8 @@ const ListLinhas = ({ data }:any) => {
   const navigation = useNavigation<GruposProps>();
   
   const [linhas, setLinhas] = useState<Array<linhasProps>>([]);
-
+  const { idUsr, name, title } = useLocalSearchParams()
+  
   useEffect(() => {
      
     let idGrp = data.grpId;
@@ -40,7 +41,7 @@ const ListLinhas = ({ data }:any) => {
   }, []);
 
   return(
-    <View className="flex flex-col bg-gray-100 ">
+    <View className="flex flex-col bg-slate-900 ">
       <Text className='p-1 ml-2 text-black text-[10px]'>{data.grpDescricao}</Text>
       <FlatList
         data={linhas}

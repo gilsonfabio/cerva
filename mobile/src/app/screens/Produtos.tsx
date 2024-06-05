@@ -1,44 +1,42 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, Image,TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, Image,TouchableOpacity, SafeAreaView, Platform } from "react-native";
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import { useNavigation, useRouter, useLocalSearchParams, Link } from "expo-router";
+import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 
 import Linhas from "./Linhas";
 import Promocoes from "./Promocoes";
-
-import { api } from "@/server/api";
 import Menubar from "@/components/Menubar";
+
+type paramsProps = {
+    idUsr: string;
+    name: string;
+    title: string;
+}
 
 export default function Produtos(){
     const navigation = useNavigation();
     const router = useRouter();
-    const { id, name } = useLocalSearchParams()
+    const { idUsr, name, title } = useLocalSearchParams<paramsProps>();
 
     const [carshop, setCarShop] = useState([]);
     const [count, setCount] = useState(0);
-
-    useEffect(() => {
-
-        let idUsrCar = id;    
-        api.get(`searchCar/${idUsrCar}`).then(resp => { 
-            setCarShop(resp.data.pedId)
-            setCount(resp.data.pedQtdtotal)
-        }).catch(() => {
-            alert('Erro no cadastro!');
-        })
-                          
-    }, []);
 
     function handleCarShopping(){
         //router.push(`/screens/LisProLinha?id=${id}&name=${name}` as any );   
     }
 
+
+//<Pagination pages={pages} setCurrentPage={setCurrentPage} setNewPage={setNewPage} pagInitial={pagDefault} />
+
+
     return(
-        <View className="flex-1 w-full h-full bg-gray-100" >            
-            <Menubar />
+        <View className="flex-1 w-full h-full bg-slate-900" >            
+            <Menubar user={idUsr} nomUser={name} sysTitle={title} />
             <Linhas />
             <Promocoes />
         </View>
     )
 }
+
+
 

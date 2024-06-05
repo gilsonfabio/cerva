@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect, useRef} from 'react'
 import { View, Text, Image, TouchableOpacity, TextInput, Alert } from "react-native"
 import { router } from "expo-router";
 
@@ -9,7 +9,9 @@ import { Link } from "expo-router";
 export default function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+     
+    let title = 'Produtos';
+     
     async function handleSignIn() {
         try {
           const response = await api.post(`/signIn`, {
@@ -18,7 +20,7 @@ export default function Login(){
           })
           let id = response.data.id;  
           let nomCliente = response.data.name;
-          router.push(`/screens/Produtos?id=${id}&name=${nomCliente}` as any );          
+          router.push(`/screens/Produtos?idUsr=${id}&name=${nomCliente}&title=${title}` as any );          
         } catch (error) {
           if (isAxiosError(error)) {
             return Alert.alert(error.response?.data)

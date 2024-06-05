@@ -4,11 +4,12 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { Slot } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync, LocationObject} from 'expo-location';
+
 import "@/styles/global.css"
 
 export default function Layout(){
-    const [location, setLocation] = useState<LocationObject | null>(null);
-  
+  const [location, setLocation] = useState<LocationObject | null>(null);
+ 
   async function requestLocationPermissions() {
     const { granted } = await requestForegroundPermissionsAsync();
 
@@ -29,3 +30,4 @@ export default function Layout(){
     </GestureHandlerRootView>        
   )
 }
+

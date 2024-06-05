@@ -43,7 +43,7 @@ export default function Promocoes() {
     return(
         <View className="flex-1 w-full h-full items-center">            
             <View>
-                <Text className="text-md font-semibold text-purple-800 mt-3 mb-3">Destaques</Text>
+                <Text className="text-md font-semibold text-amber-500 mt-3 mb-3">Destaques</Text>
             </View>
             <FlatList
                 data={promocoes}
